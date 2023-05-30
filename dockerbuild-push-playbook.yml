@@ -14,7 +14,7 @@
     ansible.builtin.shell: cd /opt/docker
 
   - name: execute shell command to build dockerfile
-    ansible.builtin.shell: docker build -t kishore18111997/deploytomcat .
+    ansible.builtin.shell: docker build -t kishore18111997/deploytomcat /opt/docker
 
   - name: Log into DockerHub
     docker_login:
