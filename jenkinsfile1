@@ -27,5 +27,9 @@ pipeline {
                 ansiblePlaybook credentialsId: 'ansible-jenkins-pemfile', disableHostKeyChecking: true, installation: 'Ansible2', inventory: '/home/jenkins/jenkins-workspace/workspace/ansible-demo2/inventory.yml', playbook: '/home/jenkins/jenkins-workspace/workspace/ansible-demo2/dockerbuild-push-playbook.yml'
             }
         }
+	sshPublisher(publishers: [sshPublisherDesc(configName: 'docker-master', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''docker rm -f kishore;
+docker rmi -f kishore18111997/deploytomcat;
+cd /opt/docker/;
+docker run -d --name kishore -p 8080:8080 kishore18111997/deploytomcat;''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true)])
     }
 }
